@@ -2,7 +2,8 @@ const { prisma } = require("../db/config")
 
 const createProduct = async(req, res) => {
     try {
-        const { name, stock, price } = req.body;
+        let { name, stock, price } = req.body;
+        price = parseFloat(price);
         if(!name || !stock || !price) return res.status(400).json({"error": "All fields required"});
         const newProduct = await prisma.product.create({
             data: {
@@ -48,7 +49,8 @@ const getById = async(req, res) => {
 
 const fullUpdate = async(req, res) => {
     const { id } = parseInt(req.params);
-    const {name, stock, price} = req.body;
+    let {name, stock, price} = req.body;
+    price = parseFloat(price);
 
     if(!id) return res.status(400).json({error: "Id field is required"})
     if(!name || !stock || !price) return res.status(400).json({error: "All fields are required"})
