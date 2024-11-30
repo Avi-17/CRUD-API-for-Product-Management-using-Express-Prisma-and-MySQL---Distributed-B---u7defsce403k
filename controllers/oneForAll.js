@@ -48,7 +48,8 @@ const getById = async(req, res) => {
 };
 
 const fullUpdate = async(req, res) => {
-    const { id } = parseInt(req.params);
+    const id = parseInt(req.params.id, 10);
+;
     let {name, stock, price} = req.body;
     price = parseFloat(price);
 
@@ -72,7 +73,8 @@ const fullUpdate = async(req, res) => {
 
 const partialUpdate = async(req, res) => {
     try {
-        const {id} = parseInt(req.params);
+        const id = parseInt(req.params.id, 10);
+;
         const updatedFields = req.body;
 
         if(!id) return res.status(400).json({error: "Id field is required"});
@@ -93,7 +95,8 @@ const partialUpdate = async(req, res) => {
 
 const deleteById = async(req, res) => {
     try {
-        const { id } = parseInt(req.params);
+        const id = parseInt(req.params.id, 10);
+;
         if(!id){
             return res.status(400).json({error: "Id field is required"});
         }
